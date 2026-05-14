@@ -19,7 +19,7 @@
     /* Dark Mode Defaults */
     --bg-primary: #020617;
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-secondary: #cbd5e1;
     --glass-bg: rgba(15, 23, 42, 0.3);
     --border-color: rgba(255, 255, 255, 0.05);
     --card-bg: rgba(15, 23, 42, 0.4);
@@ -33,7 +33,16 @@
     font-family: var(--font-sans);
     margin: 0;
     overflow-x: hidden;
+    line-height: 1.6;
     transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  p {
+    line-height: 1.7;
+  }
+
+  small, .text-sm {
+    line-height: 1.6;
   }
 
 }
@@ -42,7 +51,7 @@
   .glass-container {
     @apply relative overflow-hidden rounded-[3rem] border border-[var(--accent-primary)]/20 backdrop-blur-lg;
     background: linear-gradient(135deg, var(--card-bg) 0%, var(--glass-bg) 100%);
-    box-shadow: var(--card-shadow), 0 0 50px -12px var(--accent-glow);
+    box-shadow: var(--card-shadow), 0 0 30px -12px var(--accent-glow);
   }
 
   .nav-link {
@@ -58,7 +67,7 @@
 
   .btn-hire:hover {
     @apply scale-105;
-    box-shadow: 0 0 40px var(--accent-primary), 0 0 15px var(--accent-soft);
+    box-shadow: 0 0 25px var(--accent-primary), 0 0 10px var(--accent-soft);
   }
 
   .social-icon {
@@ -67,9 +76,9 @@
   }
 
   .glow-text {
-    @apply drop-shadow-[0_0_15px_var(--accent-soft)];
+    @apply drop-shadow-[0_0_10px_var(--accent-soft)];
     color: var(--accent-primary);
-    text-shadow: 0 0 20px var(--accent-soft);
+    text-shadow: 0 0 12px var(--accent-soft);
   }
 
   .glow-card {
@@ -80,7 +89,7 @@
   .glow-card:hover {
     @apply border-accent/40;
     background-color: var(--glass-bg);
-    box-shadow: 0 0 60px -15px var(--accent-soft), 0 0 20px -5px var(--accent-primary);
+    box-shadow: 0 0 35px -15px var(--accent-soft), 0 0 12px -5px var(--accent-primary);
   }
 
   .glow-card::before {
@@ -91,7 +100,7 @@
   }
 
   .glow-card:hover::before {
-    @apply opacity-20;
+    @apply opacity-10;
   }
 
   .glow-card > * {

@@ -21,7 +21,7 @@ const Hero = () => {
           Hi, I'm <span className="glow-text">Youssef Firas</span>
         </h2>
         <h3 className="text-2xl md:text-4xl font-extrabold text-accent mb-6 uppercase tracking-[0.2em]">
-          I'm a Developer
+          Frontend Developer Crafting Modern Web Experiences
         </h3>
         <p className="text-text-secondary text-lg mb-10 leading-relaxed max-w-lg">
           I craft high-performance digital experiences with a focus on modern web technologies. 
@@ -31,6 +31,9 @@ const Hero = () => {
         <div className="flex flex-wrap items-center gap-6">
           <Link to="/contact" className="btn-hire">
             Hire me
+          </Link>
+          <Link to="/projects" className="px-8 py-3 rounded-full font-bold transition-all duration-300 border-2 border-accent text-accent hover:bg-accent hover:text-black">
+            View Projects
           </Link>
           
           <div className="flex items-center gap-4">

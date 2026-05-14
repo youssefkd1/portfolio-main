@@ -10,16 +10,31 @@ import {
 } from 'react-icons/fa'
 import { SiTailwindcss, SiJquery } from 'react-icons/si'
 
-const skills = [
-  { name: 'HTML5', icon: <FaHtml5 />, level: '95%' },
-  { name: 'CSS3', icon: <FaCss3Alt />, level: '90%' },
-  { name: 'Bootstrap', icon: <FaBootstrap />, level: '85%' },
-  { name: 'Tailwind CSS', icon: <SiTailwindcss />, level: '95%' },
-  { name: 'JavaScript', icon: <FaJsSquare />, level: '90%' },
-  { name: 'ES6+', icon: <FaJsSquare />, level: '88%' },
-  { name: 'jQuery', icon: <SiJquery />, level: '80%' },
-  { name: 'React', icon: <FaReact />, level: '92%' },
-  { name: 'Performance Opt.', icon: <FaRocket />, level: '85%' },
+const skillCategories = [
+  {
+    category: 'Frontend',
+    skills: [
+      { name: 'React', icon: <FaReact /> },
+      { name: 'HTML5', icon: <FaHtml5 /> },
+      { name: 'JavaScript', icon: <FaJsSquare /> },
+    ]
+  },
+  {
+    category: 'Styling',
+    skills: [
+      { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+      { name: 'CSS3', icon: <FaCss3Alt /> },
+      { name: 'Bootstrap', icon: <FaBootstrap /> },
+    ]
+  },
+  {
+    category: 'Languages & Tools',
+    skills: [
+      { name: 'ES6+', icon: <FaJsSquare /> },
+      { name: 'jQuery', icon: <SiJquery /> },
+      { name: 'Performance Opt.', icon: <FaRocket /> },
+    ]
+  }
 ]
 
 const Skills = () => {
@@ -28,43 +43,43 @@ const Skills = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl"
+        className="max-w-4xl mb-12"
       >
         <h2 className="text-4xl font-bold mb-4 glow-text uppercase tracking-widest">Technical Arsenal</h2>
-        <p className="text-text-secondary text-lg mb-12">
+        <p className="text-text-secondary text-lg">
           A collection of technologies I've mastered to build fast, responsive, and scalable web applications.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {skills.map((skill, index) => (
+      <div className="space-y-10">
+        {skillCategories.map((category, catIndex) => (
           <motion.div
-            key={index}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.05 }}
-            whileHover={{ scale: 1.05, borderColor: 'var(--accent-primary)' }}
-            className="p-6 rounded-2xl bg-bg-card/20 border border-border-primary flex flex-col gap-4 group transition-all"
+            key={catIndex}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: catIndex * 0.1 }}
           >
-            <div className="flex items-center justify-between">
-              <div className="text-4xl text-accent group-hover:scale-110 transition-transform">
-                {skill.icon}
-              </div>
-              <span className="text-xs font-bold text-accent/60 uppercase tracking-tighter">
-                Proficiency
-              </span>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-bold mb-2 group-hover:text-accent">{skill.name}</h3>
-              <div className="w-full h-1.5 bg-bg-card rounded-full overflow-hidden">
-                <motion.div 
-                  initial={{ width: 0 }}
-                  animate={{ width: skill.level }}
-                  transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
-                  className="h-full bg-accent shadow-[0_0_10px_var(--accent-soft)]"
-                />
-              </div>
+            <h3 className="text-lg font-bold text-accent uppercase tracking-wider mb-4">
+              {category.category}
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {category.skills.map((skill, skillIndex) => (
+                <motion.div
+                  key={skillIndex}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: catIndex * 0.1 + skillIndex * 0.05 }}
+                  whileHover={{ scale: 1.08, borderColor: 'var(--accent-primary)' }}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full border border-border-primary bg-bg-card/30 hover:bg-bg-card/50 transition-all group cursor-pointer"
+                >
+                  <span className="text-lg text-accent group-hover:scale-110 transition-transform">
+                    {skill.icon}
+                  </span>
+                  <span className="text-sm font-semibold text-text-primary group-hover:text-accent transition-colors">
+                    {skill.name}
+                  </span>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
         ))}

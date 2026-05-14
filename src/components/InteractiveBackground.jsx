@@ -75,7 +75,7 @@ const InteractiveBackground = () => {
       draw() {
         // Outer glow
         const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 12);
-        gradient.addColorStop(0, `rgba(${hexToRgb(hexColor)}, 0.25)`); // Reduced from 0.4
+        gradient.addColorStop(0, `rgba(${hexToRgb(hexColor)}, 0.15)`); // Reduced from 0.4
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
         
         ctx.fillStyle = gradient;
@@ -104,9 +104,9 @@ const InteractiveBackground = () => {
       // Add Big Ambient Glow at mouse position (Interactive Flare)
       if (mouse.x !== null && mouse.y !== null) {
         const ambientGlow = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, mouse.radius * 3.5);
-        ambientGlow.addColorStop(0, `rgba(${hexToRgb(hexColor)}, 0.15)`); 
-        ambientGlow.addColorStop(0.3, `rgba(${hexToRgb(hexColor)}, 0.06)`); 
-        ambientGlow.addColorStop(0.7, `rgba(${hexToRgb(hexColor)}, 0.01)`); 
+        ambientGlow.addColorStop(0, `rgba(${hexToRgb(hexColor)}, 0.08)`); 
+        ambientGlow.addColorStop(0.3, `rgba(${hexToRgb(hexColor)}, 0.03)`); 
+        ambientGlow.addColorStop(0.7, `rgba(${hexToRgb(hexColor)}, 0.005)`); 
         ambientGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
         ctx.fillStyle = ambientGlow;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -144,7 +144,7 @@ const InteractiveBackground = () => {
             }
 
             // Optimized Line Glow (Double Stroke instead of ShadowBlur)
-            const baseOpacity = opacity * (0.12 + mouseBoost) * pulse; // Reduced from 0.2+mouseBoost
+            const baseOpacity = opacity * (0.07 + mouseBoost) * pulse; // Reduced from 0.2+mouseBoost
             
             // 1. Outer Glow Stroke
             ctx.strokeStyle = `rgba(${hexToRgb(hexColor)}, ${baseOpacity * 0.4})`;
