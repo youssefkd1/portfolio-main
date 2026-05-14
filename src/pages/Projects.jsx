@@ -1,5 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
+import MotionSection from '../components/motion/MotionSection'
+
 
 import aiResumeVideo from '../assets/ai-resume-analyzer.mp4'
 import studyPlannerVideo from '../assets/study-planner.mp4'
@@ -188,10 +190,8 @@ function ProjectCard({ project, index }) {
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 24 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.06, type: 'spring', stiffness: 260, damping: 26 }}
       whileHover={{ y: -6 }}
+
       onMouseEnter={handleCardEnter}
       onMouseLeave={handleCardLeave}
       onFocus={handleCardEnter}
@@ -259,15 +259,17 @@ function ProjectCard({ project, index }) {
 
 const Projects = () => {
   return (
-    <div className="px-10 py-16 md:px-20">
+    <MotionSection parallax stagger={0.06} className="px-10 py-16 md:px-20">
       <h2 className="glow-text mb-10 text-4xl font-bold uppercase tracking-widest">Featured Projects</h2>
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+
         {projects.map((project, index) => (
           <ProjectCard key={project.title} project={project} index={index} />
         ))}
       </div>
-    </div>
+    </MotionSection>
   )
 }
 
 export default Projects
+

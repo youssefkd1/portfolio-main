@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import manImage from '../assets/man1.png';
+import manImage from '../assets/result (2).png';
 
 const ThemeContext = createContext();
 
@@ -11,6 +11,17 @@ export const accentColors = {
   Sun: '#f59e0b',
   Coral: '#f43f5e',
   Rose: '#ec4899',
+};
+
+const accentHueRotate = {
+  // Base image is tuned visually; hue-rotate values approximate the accent selection.
+  Cyan: 0,
+  Iris: -55,
+  Ocean: -25,
+  Mint: -15,
+  Sun: 35,
+  Coral: 20,
+  Rose: 55,
 };
 
 export const ThemeProvider = ({ children }) => {
@@ -28,6 +39,7 @@ export const ThemeProvider = ({ children }) => {
     document.documentElement.style.setProperty('--accent-glow', `${colorHex}15`);
   }, [accentColor]);
 
+
   useEffect(() => {
     document.documentElement.classList.add('dark');
     document.documentElement.classList.remove('light');
@@ -35,13 +47,17 @@ export const ThemeProvider = ({ children }) => {
 
   const toggleAccent = (color) => setAccentColor(color);
 
+  const hueRotateDeg = accentHueRotate[accentColor] ?? 0;
+
   return (
     <ThemeContext.Provider value={{ 
       accentColor, 
-      setAccentColor, 
+      setAccentColor,
       toggleAccent,
-      currentImage: manImage
+      currentImage: manImage,
+      hueRotateDeg,
     }}>
+
       {children}
     </ThemeContext.Provider>
   );

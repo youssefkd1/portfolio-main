@@ -1,5 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import MotionSection from '../components/motion/MotionSection'
+
 import { 
   FaHtml5, 
   FaCss3Alt, 
@@ -39,12 +41,9 @@ const skillCategories = [
 
 const Skills = () => {
   return (
-    <div className="px-10 md:px-20 py-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mb-12"
-      >
+    <MotionSection parallax stagger={0.06} className="px-10 md:px-20 py-16">
+      <motion.div className="max-w-4xl mb-12">
+
         <h2 className="text-4xl font-bold mb-4 glow-text uppercase tracking-widest">Technical Arsenal</h2>
         <p className="text-text-secondary text-lg">
           A collection of technologies I've mastered to build fast, responsive, and scalable web applications.
@@ -55,10 +54,8 @@ const Skills = () => {
         {skillCategories.map((category, catIndex) => (
           <motion.div
             key={catIndex}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: catIndex * 0.1 }}
           >
+
             <h3 className="text-lg font-bold text-accent uppercase tracking-wider mb-4">
               {category.category}
             </h3>
@@ -66,12 +63,10 @@ const Skills = () => {
               {category.skills.map((skill, skillIndex) => (
                 <motion.div
                   key={skillIndex}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: catIndex * 0.1 + skillIndex * 0.05 }}
                   whileHover={{ scale: 1.08, borderColor: 'var(--accent-primary)' }}
                   className="flex items-center gap-2 px-4 py-2 rounded-full border border-border-primary bg-bg-card/30 hover:bg-bg-card/50 transition-all group cursor-pointer"
                 >
+
                   <span className="text-lg text-accent group-hover:scale-110 transition-transform">
                     {skill.icon}
                   </span>
@@ -84,8 +79,9 @@ const Skills = () => {
           </motion.div>
         ))}
       </div>
-    </div>
+    </MotionSection>
   )
 }
 
 export default Skills
+

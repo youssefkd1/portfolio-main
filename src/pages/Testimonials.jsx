@@ -1,6 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { FaStar } from 'react-icons/fa'
+import MotionSection from '../components/motion/MotionSection'
+
 
 const testimonials = [
   {
@@ -49,12 +51,9 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <div className="px-10 md:px-20 py-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mb-12"
-      >
+    <MotionSection parallax stagger={0.06} className="px-10 md:px-20 py-16">
+      <motion.div className="max-w-4xl mb-12">
+
         <h2 className="text-4xl font-bold mb-4 glow-text uppercase tracking-widest">Client Stories</h2>
         <p className="text-text-secondary text-lg">
           Real feedback from amazing clients and collaborators. See what they have to say about working together.
@@ -65,12 +64,10 @@ const Testimonials = () => {
         {testimonials.map((testimonial, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
             whileHover={{ y: -8 }}
             className="glow-card p-6 rounded-2xl"
           >
+
             {/* Stars */}
             <div className="flex gap-1 mb-4">
               {Array.from({ length: testimonial.rating }).map((_, i) => (
@@ -101,11 +98,9 @@ const Testimonials = () => {
 
       {/* Stats Section */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
         className="mt-16 pt-16 border-t border-border-primary"
       >
+
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -130,8 +125,9 @@ const Testimonials = () => {
           </motion.div>
         </div>
       </motion.div>
-    </div>
+    </MotionSection>
   )
 }
 
 export default Testimonials
+

@@ -18,7 +18,7 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ]
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen((v) => !v)
 
   return (
     <nav className="w-full flex items-center justify-between px-6 md:px-10 py-6 md:py-8 relative z-[100]">
@@ -33,9 +33,7 @@ const Navbar = () => {
             <NavLink
               key={link.name}
               to={link.path}
-              className={({ isActive }) =>
-                `nav-link ${isActive ? 'text-accent font-bold' : ''}`
-              }
+              className={({ isActive }) => `nav-link ${isActive ? 'text-accent font-bold' : ''}`}
             >
               {link.name}
             </NavLink>
@@ -50,7 +48,9 @@ const Navbar = () => {
                 key={name}
                 onClick={() => toggleAccent(name)}
                 className={`w-4 h-4 rounded-full transition-all duration-300 hover:scale-125 ${
-                  accentColor === name ? 'ring-2 ring-[var(--text-primary)] ring-offset-2 ring-offset-[var(--bg-primary)] scale-110' : 'opacity-60'
+                  accentColor === name
+                    ? 'ring-2 ring-[var(--text-primary)] ring-offset-2 ring-offset-[var(--bg-primary)] scale-110'
+                    : 'opacity-60'
                 }`}
                 style={{ backgroundColor: hex }}
                 title={name}
@@ -61,8 +61,10 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Toggle */}
-      <button 
+      <button
         onClick={toggleMenu}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isOpen}
         className="lg:hidden text-3xl text-accent z-50 transition-transform active:scale-90"
       >
         {isOpen ? <HiX /> : <HiMenuAlt3 />}
@@ -77,40 +79,55 @@ const Navbar = () => {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
             className="fixed inset-0 bg-slate-950/95 backdrop-blur-xl z-40 flex flex-col items-center justify-center gap-8 lg:hidden"
+            role="dialog"
+            aria-modal="true"
           >
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.name}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={({ isActive }) =>
-                  `text-3xl font-black uppercase tracking-widest transition-colors ${
-                    isActive ? 'text-accent' : 'text-white/60'
-                  }`
-                }
-              >
-                {link.name}
-              </NavLink>
-            ))}
-            
-            {/* Mobile Accent Picker */}
-            <div className="mt-8 flex flex-col items-center gap-6 bg-[var(--card-bg)] p-6 rounded-3xl border border-[var(--border-color)]">
-              <div className="flex items-center gap-4">
-                {Object.entries(accentColors).map(([name, hex]) => (
-                  <button
-                    key={name}
-                    onClick={() => toggleAccent(name)}
-                    className={`w-8 h-8 rounded-full transition-all duration-300 ${
-                      accentColor === name ? 'ring-4 ring-[var(--text-primary)] ring-offset-4 ring-offset-[var(--bg-primary)] scale-110' : 'opacity-40'
-                    }`}
-                    style={{ backgroundColor: hex }}
-                  />
-                ))}
+            {/* Tap target to close */}
+            <button
+              aria-label="Close menu"
+              className="absolute inset-0"
+              onClick={() => setIsOpen(false)}
+            />
+
+            <div className="relative w-full max-w-[22rem] flex flex-col items-center gap-6 px-4">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.name}
+                  to={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={({ isActive }) =>
+                    `w-full text-center text-3xl font-black uppercase tracking-widest transition-colors rounded-xl px-6 py-2 outline-none focus-visible:ring-2 focus-visible:ring-accent/60 ${
+                      isActive ? 'text-accent bg-accent/10' : 'text-white/60 hover:text-accent/90'
+                    }`
+                  }
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+
+              {/* Mobile Accent Picker */}
+              <div className="mt-2 w-full flex flex-col items-center gap-3 bg-[var(--card-bg)] p-6 rounded-3xl border border-[var(--border-color)] relative overflow-hidden">
+                <div className="text-xs font-bold uppercase tracking-widest text-text-secondary">Accent</div>
+                <div className="flex items-center gap-4">
+                  {Object.entries(accentColors).map(([name, hex]) => (
+                    <button
+                      key={name}
+                      onClick={() => toggleAccent(name)}
+                      aria-label={`Set accent ${name}`}
+                      className={`w-8 h-8 rounded-full transition-all duration-300 ${
+                        accentColor === name
+                          ? 'ring-4 ring-[var(--text-primary)] ring-offset-4 ring-offset-[var(--bg-primary)] scale-110'
+                          : 'opacity-40 hover:opacity-70'
+                      }`}
+                      style={{ backgroundColor: hex }}
+                    />
+                  ))}
+                </div>
               </div>
+
+              {/* Decorative accent element */}
+              <div className="absolute -bottom-10 w-20 h-1 bg-accent rounded-full shadow-[0_0_20px_var(--accent-soft)]" />
             </div>
-            
-            {/* Decorative accent element */}
-            <div className="absolute bottom-10 w-20 h-1 bg-accent rounded-full shadow-[0_0_20px_var(--accent-soft)]" />
           </motion.div>
         )}
       </AnimatePresence>
@@ -119,3 +136,4 @@ const Navbar = () => {
 }
 
 export default Navbar
+

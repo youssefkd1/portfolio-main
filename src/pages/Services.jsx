@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaCode, FaCloud, FaMobileAlt, FaSearch, FaShieldAlt } from 'react-icons/fa' 
 import { PiSpeedometerFill } from 'react-icons/pi'
+import MotionSection from '../components/motion/MotionSection'
+
 
 const services = [
   {
@@ -24,12 +26,9 @@ const services = [
 
 const Services = () => {
   return (
-    <div className="px-10 md:px-20 py-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mb-16"
-      >
+    <MotionSection parallax stagger={0.07} className="px-10 md:px-20 py-16">
+      <motion.div className="max-w-4xl mb-16">
+
         <h2 className="text-4xl font-bold mb-4 glow-text uppercase tracking-widest">Solutions & Services</h2>
         <p className="text-text-secondary text-lg leading-relaxed">
           I offer a wide range of specialized services to help startups and enterprises 
@@ -41,12 +40,10 @@ const Services = () => {
         {services.map((service, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
             whileHover={{ y: -5, scale: 1.02 }}
-            transition={{ delay: index * 0.1 }}
             className="p-10 rounded-3xl cursor-pointer glow-card group relative"
           >
+
             
             <div className="text-4xl text-accent mb-8 group-hover:scale-110 transition-transform">
               {service.icon}
@@ -61,11 +58,8 @@ const Services = () => {
       </div>
 
       {/* CTA Section */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        className="mt-24 p-12 rounded-[2.5rem] bg-accent/5 border border-accent/10 text-center"
-      >
+      <motion.div className="mt-24 p-12 rounded-[2.5rem] bg-accent/5 border border-accent/10 text-center">
+
         <h3 className="text-3xl font-bold mb-6">Need a custom solution?</h3>
         <p className="text-text-secondary max-w-2xl mx-auto mb-10">
           If you have a unique challenge that doesn't fit into these categories, 
@@ -75,8 +69,9 @@ const Services = () => {
           Start a Conversation
         </Link>
       </motion.div>
-    </div>
+    </MotionSection>
   )
 }
 
 export default Services
+

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaPaperPlane } from 'react-icons/fa'
+import MotionSection from '../components/motion/MotionSection'
+
 
 const Contact = () => {
   const [status, setStatus] = useState('idle') // 'idle' | 'submitting' | 'success' | 'error'
@@ -29,14 +31,12 @@ const Contact = () => {
   }
 
   return (
-    <div className="px-10 md:px-20 py-16 flex-grow flex flex-col">
+    <MotionSection parallax stagger={0.07} className="px-10 md:px-20 py-16 flex-grow flex flex-col">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+
         {/* Contact Info */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="space-y-10"
-        >
+        <motion.div className="space-y-10">
+
           <div>
             <h2 className="text-4xl font-bold mb-4 glow-text uppercase tracking-widest">Connect With Me</h2>
             <p className="text-text-secondary text-lg leading-relaxed">
@@ -80,10 +80,9 @@ const Contact = () => {
 
         {/* Contact Form */}
         <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
           className="p-8 md:p-10 rounded-3xl bg-bg-card/20 border border-border-primary shadow-2xl relative overflow-hidden"
         >
+
           {/* Subtle glow effect in corner */}
           <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent/10 blur-[80px] rounded-full" />
           
@@ -157,8 +156,9 @@ const Contact = () => {
           </form>
         </motion.div>
       </div>
-    </div>
+    </MotionSection>
   )
 }
 
 export default Contact
+

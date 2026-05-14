@@ -2,18 +2,19 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { FaCode, FaRocket, FaLightbulb } from 'react-icons/fa'
 import { useTheme } from '../theme/ThemeContext'
+import MotionSection from '../components/motion/MotionSection'
 
 const About = () => {
-  const { currentImage } = useTheme();
+
+  const { currentImage, hueRotateDeg } = useTheme();
+
   return (
-    <div className="px-6 md:px-20 py-16 flex flex-col gap-20">
+    <MotionSection parallax stagger={0.06} className="px-6 md:px-20 py-16 flex flex-col gap-20">
       {/* Hero Section */}
       <div className="flex flex-col lg:flex-row items-center gap-16">
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          className="flex-1 space-y-8"
-        >
+
+        <motion.div className="flex-1 space-y-8">
+
           <div className="inline-block px-4 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-black uppercase tracking-widest">
             Digital Identity / 01
           </div>
@@ -50,11 +51,8 @@ const About = () => {
           </div>
         </motion.div>
 
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="lg:w-[400px] relative group"
-        >
+        <motion.div className="lg:w-[400px] relative group">
+
           {/* Tech frame overlay */}
           <div className="absolute -inset-4 border border-accent/20 rounded-3xl group-hover:border-accent/40 transition-all duration-500" />
           <div className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 border-accent rounded-tr-3xl" />
@@ -65,7 +63,12 @@ const About = () => {
               src={currentImage} 
               alt="Youssef Firas" 
               className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              style={{
+                filter: `hue-rotate(${hueRotateDeg}deg)`,
+                transition: 'filter 500ms ease',
+              }}
             />
+
             {/* Scanning line animation */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/20 to-transparent h-1/2 w-full animate-[bounce_3s_infinite] pointer-events-none opacity-50" />
           </div>
@@ -93,11 +96,9 @@ const About = () => {
         ].map((item, idx) => (
           <motion.div
             key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
             className="p-8 rounded-3xl cursor-pointer bg-bg-card/20 border border-border-primary hover:border-accent/20 transition-all group"
           >
+
             <div className="text-3xl text-accent mb-6 group-hover:scale-110 transition-transform">
               {item.icon}
             </div>
@@ -110,11 +111,8 @@ const About = () => {
       </div>
 
       {/* Signature CTA */}
-      <motion.div 
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        className="text-center py-10"
-      >
+      <motion.div className="text-center py-10">
+
         <p className="text-text-secondary italic text-lg max-w-2xl mx-auto">
           "The best code is not the one that works, but the one that empowers 
           others to build upon it."
@@ -127,8 +125,9 @@ const About = () => {
           <div className="w-10 h-[1px] bg-accent/30" />
         </div>
       </motion.div>
-    </div>
+    </MotionSection>
   )
 }
 
 export default About
+

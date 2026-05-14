@@ -2,22 +2,25 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaGithub } from 'react-icons/fa'
 import { FaUpwork } from 'react-icons/fa6';
-import { SiFreelancer ,SiFiverr } from "react-icons/si";
+import { SiFreelancer, SiFiverr } from "react-icons/si";
 import { motion } from 'framer-motion'
 import { useTheme } from '../theme/ThemeContext'
-
 const Hero = () => {
-  const { accentColor, currentImage } = useTheme();
+  const { accentColor, currentImage, hueRotateDeg } = useTheme();
+
 
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between px-10 md:px-20 py-10 gap-16 flex-grow">
-      <motion.div 
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8 }}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-10% 0px' }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="flex-1 max-w-2xl"
       >
+
         <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">
+
           Hi, I'm <span className="glow-text">Youssef Firas</span>
         </h2>
         <h3 className="text-2xl md:text-4xl font-extrabold text-accent mb-6 uppercase tracking-[0.2em]">
@@ -46,25 +49,26 @@ const Hero = () => {
         </div>
       </motion.div>
 
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8 }}
-        className="flex-1 flex justify-center lg:justify-end relative"
-      >
+      <motion.div className="flex-1 flex justify-center lg:justify-end relative">
+
         <div className="relative w-72 h-72 md:w-[400px] md:h-[400px]">
           {/* Animated glow rings */}
           <div className="absolute inset-0 rounded-full border-2 border-accent/30 animate-[ping_3s_linear_infinite]" />
           <div className="absolute inset-2 rounded-full border-2 border-accent/20 animate-[ping_2s_linear_infinite]" />
           
-          <div className="w-full h-full rounded-full border-4 border-accent shadow-[0_0_40px_var(--accent-soft)] overflow-hidden relative z-10 bg-bg-card">
+          <div className="w-full h-full rounded-full border-4 border-accent bg-bg-card shadow-[0_0_40px_var(--accent-soft)] overflow-hidden relative z-10">
             <img 
               src={currentImage} 
               alt="youssef firas" 
               loading='lazy'
               fetchPriority='high'
               className="w-full h-full object-cover"
+              style={{
+                filter: `hue-rotate(${hueRotateDeg}deg)`,
+                transition: 'filter 500ms ease',
+              }}
             />
+
           </div>
         </div>
       </motion.div>
@@ -72,4 +76,6 @@ const Hero = () => {
   )
 }
 
+
 export default Hero
+
